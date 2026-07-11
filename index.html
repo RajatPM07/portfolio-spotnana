@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajat Sharma | Product Portfolio for Spotnana</title>
+<meta name="description" content="Portfolio of Rajat Sharma, Senior Product Manager building AI native products. Prepared for the Staff Product Manager, Agentic Travel Experiences role at Spotnana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16211f;
+    --ink-soft: #47555200;
+    --body: #3d4a47;
+    --muted: #6b7a76;
+    --paper: #faf9f6;
+    --card: #ffffff;
+    --line: #e5e2da;
+    --accent: #0e6b5c;
+    --accent-soft: #e7f2ef;
+    --amber: #9a6a1c;
+    --amber-soft: #faf1de;
+    --radius: 14px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--paper);
+    color: var(--body);
+    line-height: 1.65;
+    font-size: 16.5px;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display {
+    font-family: "Fraunces", Georgia, serif;
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 249, 246, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px;
+  }
+  nav .brand { font-weight: 700; color: var(--ink); font-size: 15px; letter-spacing: 0.01em; }
+  nav .links { display: flex; gap: 22px; font-size: 13.5px; font-weight: 500; }
+  nav .links a { color: var(--muted); }
+  nav .links a:hover { color: var(--accent); text-decoration: none; }
+  @media (max-width: 720px) { nav .links { display: none; } }
+
+  /* Hero */
+  header { padding: 88px 0 72px; }
+  .kicker {
+    display: inline-block;
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  header h1 { font-size: clamp(38px, 6vw, 56px); margin-bottom: 20px; font-weight: 500; }
+  header .lede { font-size: clamp(18px, 2.6vw, 21px); color: var(--body); max-width: 640px; margin-bottom: 16px; }
+  header .why { font-size: 16.5px; color: var(--muted); max-width: 640px; }
+  header .why strong { color: var(--ink); font-weight: 600; }
+
+  /* Sections */
+  section { padding: 64px 0; border-top: 1px solid var(--line); }
+  .section-label {
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  section > .wrap > h2 { font-size: clamp(28px, 4vw, 36px); margin-bottom: 8px; font-weight: 500; }
+  .sub { color: var(--muted); font-size: 16px; margin-bottom: 36px; max-width: 640px; }
+
+  h3 {
+    font-size: 21px; margin: 40px 0 14px; font-weight: 600;
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  h3 .n { color: var(--accent); font-size: 15px; font-family: "Inter", sans-serif; font-weight: 700; }
+  p + p { margin-top: 14px; }
+
+  /* Stat cards */
+  .stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px; margin: 26px 0;
+  }
+  .stat {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 22px 20px;
+  }
+  .stat .num { font-family: "Fraunces", Georgia, serif; font-size: 30px; font-weight: 600; color: var(--ink); line-height: 1.1; }
+  .stat .num span { color: var(--accent); }
+  .stat .lbl { font-size: 13.5px; color: var(--muted); margin-top: 8px; line-height: 1.45; }
+
+  /* Facts rows */
+  .facts { margin: 22px 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--card); }
+  .fact { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 16px 20px; border-top: 1px solid var(--line); }
+  .fact:first-child { border-top: none; }
+  .fact dt { font-size: 13px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; padding-top: 2px; }
+  .fact dd { font-size: 15.5px; }
+  @media (max-width: 600px) { .fact { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* Metric gated rollout rail */
+  .gateflow { position: relative; margin: 26px 0; }
+  .gateflow::before { content: ""; position: absolute; left: 18px; top: 22px; bottom: 22px; width: 2px; background: var(--line); }
+  .gateflow .phase, .gateflow .gate { position: relative; margin-left: 52px; }
+  .gateflow .phase + .gate, .gateflow .gate + .phase { margin-top: 14px; }
+  .gateflow .phase::before { content: ""; position: absolute; left: -40px; top: 22px; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); border: 3px solid var(--paper); }
+  .gateflow .phase.done::before, .gateflow .phase.now::before { background: var(--accent); }
+  .gate { border: 1.5px dashed; border-radius: var(--radius); padding: 14px 18px; }
+  .gate.cleared { border-color: var(--accent); background: var(--accent-soft); }
+  .gate.pending { border-color: var(--amber); background: var(--amber-soft); }
+  .gate .gtag { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 8px; }
+  .gate.cleared .gtag { color: var(--accent); }
+  .gate.pending .gtag { color: var(--amber); }
+  .gchip { display: inline-block; background: var(--card); border: 1px solid var(--line); border-radius: 100px; padding: 5px 12px; font-size: 13px; color: var(--body); margin: 3px 6px 3px 0; }
+  .gate .gnote { font-size: 13.5px; color: var(--body); margin-top: 8px; }
+  .phase { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; position: relative; }
+  .phase .tag {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 100px; margin-bottom: 12px;
+  }
+  .phase.done .tag { background: var(--accent-soft); color: var(--accent); }
+  .phase.now .tag { background: #123f38; color: #fff; }
+  .phase.next .tag { background: var(--amber-soft); color: var(--amber); }
+  .phase h4 { font-size: 16px; color: var(--ink); margin-bottom: 8px; font-weight: 600; }
+  .phase p { font-size: 14px; color: var(--body); line-height: 1.55; }
+
+  /* Callout */
+  .callout {
+    background: var(--accent-soft); border-radius: var(--radius);
+    padding: 22px 24px; margin: 26px 0; font-size: 15.5px;
+    border-left: 3px solid var(--accent);
+  }
+  .callout strong { color: var(--ink); }
+
+  .note {
+    background: var(--amber-soft); border-left: 3px solid var(--amber);
+    border-radius: var(--radius); padding: 16px 20px; margin: 0 0 28px;
+    font-size: 14.5px; color: #6d4e18;
+  }
+  .note strong { color: var(--amber); }
+
+  /* Pipeline flow */
+  .flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap: 10px; align-items: stretch; margin: 26px 0; }
+  @media (max-width: 780px) { .flow { grid-template-columns: 1fr; } .farrow { transform: rotate(90deg); margin: 0 auto; } }
+  .fstep { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; }
+  .fstep .fk { font-size: 11px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .fstep h5 { font-family: "Inter", sans-serif; font-size: 15px; color: var(--ink); margin-bottom: 6px; font-weight: 600; line-height: 1.35; }
+  .fstep p { font-size: 13.5px; color: var(--muted); line-height: 1.5; margin: 0; }
+  .farrow { display: flex; align-items: center; color: var(--muted); font-size: 18px; }
+
+  /* Builder cards */
+  .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 30px; }
+  @media (max-width: 720px) { .projects { grid-template-columns: 1fr; } }
+  .project {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; display: flex; flex-direction: column;
+  }
+  .project h4 { font-family: "Fraunces", Georgia, serif; font-size: 21px; color: var(--ink); margin-bottom: 4px; font-weight: 600; }
+  .project .win { font-size: 13px; font-weight: 600; color: var(--amber); margin-bottom: 12px; }
+  .project p { font-size: 15px; flex: 1; }
+  .project .stack { font-size: 13px; color: var(--muted); margin-top: 14px; }
+  .project .plinks { margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; font-size: 14px; font-weight: 600;
+    padding: 9px 18px; border-radius: 100px;
+    background: var(--ink); color: #fff !important;
+  }
+  .btn:hover { background: var(--accent); text-decoration: none; }
+  .btn.ghost { background: transparent; color: var(--ink) !important; border: 1.5px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent) !important; }
+
+  /* Close */
+  footer { border-top: 1px solid var(--line); padding: 72px 0 80px; text-align: center; }
+  footer h2 { font-size: clamp(26px, 4vw, 34px); margin-bottom: 14px; font-weight: 500; }
+  footer .contact { margin: 26px 0 8px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 100px;
+    padding: 9px 18px; font-size: 14px; font-weight: 500; color: var(--ink) !important;
+  }
+  .chip:hover { border-color: var(--accent); color: var(--accent) !important; text-decoration: none; }
+  footer .resume { margin-top: 26px; font-size: 14.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Rajat Sharma</div>
+    <div class="links">
+      <a href="#ria">Ria</a>
+      <a href="#tripsecure">TripSecure+</a>
+      <a href="#elevate">Elevate</a>
+      <a href="#builder">Builder</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <span class="kicker">Prepared for the Staff PM, Agentic Travel Experiences role at Spotnana</span>
+    <h1>Rajat Sharma</h1>
+    <p class="lede">Senior Product Manager building AI native products, with an InsurTech foundation in high stakes, regulated decision systems.</p>
+    <p class="why">This role asks for someone who has owned an AI product end to end, from search to payment. <strong>That is the shape of work I have already done</strong>: I rebuilt a travel product from scratch and shipped an AI underwriting system from definition to production, and I would love to do it next for travel itself.</p>
+  </div>
+</header>
+
+<section id="ria">
+  <div class="wrap">
+    <div class="section-label">Case Study 01</div>
+    <h2>Ria: AI underwriting for health insurance</h2>
+    <p class="sub">Turning a 3 hour manual review into a governed AI decision, without ever putting trust on credit.</p>
+
+    <h3><span class="n">1.1</span> The problem, why, who, and validation</h3>
+    <div class="facts">
+      <div class="fact"><dt>The problem</dt><dd>About 45 percent of ICICI Lombard's monthly health insurance proposals were non standard cases that could not pass straight through, every one needed manual underwriting review.</dd></div>
+      <div class="fact"><dt>Why it hurt</dt><dd>Each review took about 3 hours of an underwriter's time, which meant nearly half of all incoming volume was routed through the slowest path in the funnel.</dd></div>
+      <div class="fact"><dt>Why now</dt><dd>Fixing it had become a CXO level strategic priority, with the work cutting across 8 teams and 5 integrated platforms.</dd></div>
+      <div class="fact"><dt>Who for</dt><dd>The underwriters carrying the manual load, and every customer whose proposal sat waiting on a 3 hour review.</dd></div>
+      <div class="fact"><dt>Validation</dt><dd>I was the sole individual contributor PM on the initiative, and took it from problem definition to a working pilot in 2 months.</dd></div>
+    </div>
+
+    <h3><span class="n">1.2</span> What we shipped, and what it moved</h3>
+    <div class="stats">
+      <div class="stat"><div class="num">3 hrs <span>&rarr;</span> mins</div><div class="lbl">Per case underwriting effort</div></div>
+      <div class="stat"><div class="num">3s <span>&rarr;</span> 1s</div><div class="lbl">Inference latency</div></div>
+      <div class="stat"><div class="num">95<span>%</span></div><div class="lbl">Agreement between the AI and human underwriters</div></div>
+      <div class="stat"><div class="num">~90<span>%</span></div><div class="lbl">Per insured accuracy</div></div>
+      <div class="stat"><div class="num">&#8377;20 to 30 cr</div><div class="lbl">Projected annual savings at full rollout</div></div>
+    </div>
+
+    <h3><span class="n">1.3</span> How we earned the right to automate</h3>
+    <p>This is the part of the story I am most careful about, because it is easy to overclaim. In 2026, saying you shipped an LLM feature is table stakes. The differentiating work is the governance wrapped around it. Ria is not full automation with a safety net hidden somewhere. It is a phased rollout behind human in the loop review gates, where review coverage only decreases after specific trust metrics clear their bar.</p>
+
+    <div class="gateflow">
+      <div class="phase done">
+        <span class="tag">Phase 1, complete</span>
+        <h4>100 percent human review</h4>
+        <p>Every AI verdict sat behind a human underwriter. This phase existed to generate the evidence, not to save time.</p>
+      </div>
+      <div class="gate cleared">
+        <span class="gtag">Gate cleared, review coverage allowed to decrease</span>
+        <span class="gchip">LLM to underwriter agreement: 95 percent, against a 92 percent bar</span>
+        <span class="gchip">Dangerous miss rate, AI more lenient than a human: targeted at near zero</span>
+        <p class="gnote">The dangerous miss rate is the number I watch hardest, because it measures harm, not just accuracy.</p>
+      </div>
+      <div class="phase now">
+        <span class="tag">Phase 2, live now</span>
+        <h4>Risk tiered review</h4>
+        <p>Lower risk tiers carry lighter review while high risk cases keep a full human pass. Coverage came down only because the gate above cleared. Trust was earned, not assumed.</p>
+      </div>
+      <div class="gate pending">
+        <span class="gtag">Next gate, in active buildout, not yet live</span>
+        <span class="gchip">Fairness disparity thresholds across groups</span>
+        <span class="gchip">Verdict to transcript traceability, every decision explainable back to its evidence</span>
+      </div>
+      <div class="phase next">
+        <span class="tag">Phase 3, planned</span>
+        <h4>Wider automation, only if earned</h4>
+        <p>The next reduction in review coverage waits on the gate above. Both requirements are in buildout right now, and I would rather say that plainly than claim them early.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>The broader frame:</strong> this rollout sits inside a governance framework spanning 7 domains: decision integrity, data protection and privacy, consent integrity, human oversight and accountability, security and abuse resistance, duty of care and interaction safety, and third party and vendor risk. Some of it is live, some of it is a target we are building toward, and the roadmap is honest about which is which. Naming an AI pattern is easy. Operating a framework like this in a regulated industry, where speed can never come at the cost of trust or data integrity, is the discipline I would bring to Spotnana.
+    </div>
+  </div>
+</section>
+
+<section id="tripsecure">
+  <div class="wrap">
+    <div class="section-label">Case Study 02</div>
+    <h2>TripSecure+: rebuilding travel insurance from scratch</h2>
+    <p class="sub">A ground up replacement for a decade old product, owned from discovery through launch.</p>
+
+    <h3><span class="n">2.1</span> The problem, and why now</h3>
+    <p>ICICI Lombard's travel insurance product was about 10 years old and had become weak in ways customers could feel. Coverage terms were broken and rigid. Pricing was fixed and outdated, unresponsive to how people actually travel. Distribution was limited, awareness was low, there was no availability through brokers or partners, and the claims experience was broken. TripSecure+ was built from scratch to replace it, not patched on top of it.</p>
+    <div class="facts">
+      <div class="fact"><dt>Why now, one</dt><dd>The post pandemic travel rebound reopened the market opportunity.</dd></div>
+      <div class="fact"><dt>Why now, two</dt><dd>Competitive and market research surfaced exactly how structurally behind the old product was.</dd></div>
+      <div class="fact"><dt>Who for</dt><dd>Direct retail travelers and broker or partner channel customers, targeted together from the start rather than sequentially.</dd></div>
+      <div class="fact"><dt>Validation</dt><dd>Over 100 generative customer interviews shaped the rebuild.</dd></div>
+    </div>
+
+    <h3><span class="n">2.2</span> What we built, and what it did</h3>
+    <div class="stats">
+      <div class="stat"><div class="num">&#8377;100 <span>&rarr;</span> 300 cr</div><div class="lbl">Revenue growth in 18 months</div></div>
+      <div class="stat"><div class="num">6 <span>mo</span></div><div class="lbl">To profitability</div></div>
+      <div class="stat"><div class="num">23<span>%</span></div><div class="lbl">Of portfolio from the broker channel, powered by a dynamic pricing engine</div></div>
+      <div class="stat"><div class="num">100<span>+</span></div><div class="lbl">Destinations covered, built from scratch</div></div>
+    </div>
+    <p>The launch included an international partner debut in Dubai. I directed a 10 person cross functional team spanning engineering, design, UX research, and underwriting, from discovery through launch. The claims experience, named above as one of the old product's failures, was rebuilt as part of the ground up effort.</p>
+
+    <div class="callout">
+      <strong>Why this maps to Spotnana:</strong> TripSecure+'s purchase journey is discovering coverage, configuring it, and paying for it. That is the same end to end ownership Spotnana describes for this role, owning a flow from search to payment. I have carried a traveler from first intent to completed transaction before. I want to do it again at Spotnana's scale.
+    </div>
+  </div>
+</section>
+
+<section id="elevate">
+  <div class="wrap">
+    <div class="section-label">Case Study 03</div>
+    <h2>Elevate and the recommendation engine</h2>
+    <p class="sub">A market share strategy on a 1,500 crore rupee portfolio, and the ML engine that turned it into a decision for every customer.</p>
+
+    <h3><span class="n">3.1</span> The problem, why, who, and validation</h3>
+    <p>In FY24-25 I owned Elevate, the growth strategy for a retail health insurance portfolio of about 1,500 crore rupees holding 2.3 percent market share. Two levers had real headroom. The first was competitive positioning, where an assessment of the landscape surfaced gaps the portfolio could credibly close. The second was the existing customer base, where cross sell offers were accepted just 1.5 percent of the time and there was no systematic way to decide which customer should get which action next.</p>
+    <div class="facts">
+      <div class="fact"><dt>The problem</dt><dd>A 1,500 crore portfolio at 2.3 percent share, with growth gated on positioning gaps and an untapped existing customer base.</dd></div>
+      <div class="fact"><dt>Why it hurt</dt><dd>A 1.5 percent cross sell acceptance baseline meant nearly every offer shown to an existing customer was the wrong offer, wasted attention on both sides.</dd></div>
+      <div class="fact"><dt>Why now</dt><dd>The competitive assessment made the positioning gaps concrete, and FY24-25 was the cycle to close them before competitors did.</dd></div>
+      <div class="fact"><dt>Who for</dt><dd>Existing policyholders who deserved a relevant next offer instead of a generic one, and the customer segments addressed by new coverage architecture and pricing.</dd></div>
+      <div class="fact"><dt>Validation</dt><dd>I authored the detailed product requirements documents defining coverage architecture and pricing across customer segments, and mentored one Associate PM to independent product ownership along the way.</dd></div>
+    </div>
+
+    <h3><span class="n">3.2</span> What we built, and what it moved</h3>
+    <div class="stats">
+      <div class="stat"><div class="num">2.3 <span>&rarr;</span> 3.1%</div><div class="lbl">Market share, a 35 percent relative gain</div></div>
+      <div class="stat"><div class="num">0.82</div><div class="lbl">AUC-ROC in production</div></div>
+      <div class="stat"><div class="num">+2.5<span>%</span></div><div class="lbl">Retention lift</div></div>
+      <div class="stat"><div class="num">1.5 <span>&rarr;</span> 8%</div><div class="lbl">Cross sell offer acceptance, a 5.3x increase</div></div>
+      <div class="stat"><div class="num">18<span>%</span></div><div class="lbl">CTR on the 1 click cross sell surface in checkout</div></div>
+      <div class="stat"><div class="num">+10<span>%</span></div><div class="lbl">Lift in average revenue per user</div></div>
+    </div>
+    <div class="flow">
+      <div class="fstep"><div class="fk">Inputs</div><h5>10 plus customer signals</h5><p>Tenure, claim history, engagement, policy type, and more</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep"><div class="fk">Model</div><h5>One engine, two predictions</h5><p>Churn risk and cross sell propensity together, 0.82 AUC-ROC in production</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep"><div class="fk">Decision</div><h5>Next best action</h5><p>Assigned to every customer at portfolio scale</p></div>
+      <div class="farrow">&rarr;</div>
+      <div class="fstep"><div class="fk">Surface</div><h5>1 click cross sell in checkout</h5><p>ML cohort targeted, zero cannibalization of the core journey</p></div>
+    </div>
+    <p>The engine behind these numbers is a production ML recommendation system I shipped in partnership with an applied science team, working together on feature engineering, evaluation metrics, and production guardrails. One model run answers both questions that matter for an existing customer: are they at risk of leaving, and what should we offer them next.</p>
+    <p>Scores do not sit in a dashboard waiting for someone to act. They feed the 1 click cross sell surface inside the checkout flow, which carried a hard design constraint from day one: zero cannibalization of the core purchase journey. It cleared that bar while delivering an 18 percent click through rate and a 10 percent lift in average revenue per user.</p>
+
+    <div class="callout">
+      <strong>Why this maps to Spotnana:</strong> this role names recommendations and personalization as one of its pillars, driving the engine that decides what travelers see first. That is, underneath, a next best action problem. Recommending the right flight, hotel, or ancillary at the right moment is the same shape of work as this engine: propensity modeling, cohort targeting, and attach economics inside a checkout flow that must never degrade the core journey. I have shipped that discipline to production once, and I would like to do it where the actions are trips.
+    </div>
+  </div>
+</section>
+
+<section id="builder">
+  <div class="wrap">
+    <div class="section-label">Off the Clock</div>
+    <h2>I ship things myself</h2>
+    <p class="sub">Because the fastest way to have an opinion about AI products is to build them.</p>
+
+    <div class="projects">
+      <div class="project">
+        <h4>Lenny Live</h4>
+        <div class="win">&#127942; First place, Lenny's Data Competition 2026</div>
+        <p>A Chrome extension built as an ambient AI mentor. It watches your active workspace and surfaces contextual product advice over a curated corpus of Lenny Rachitsky's newsletter and podcast transcripts, spoken in a cloned voice, at the moment you are actually inside the problem.</p>
+        <div class="stack">Chrome extension &middot; RAG via Supabase pgvector &middot; ElevenLabs voice synthesis &middot; agentic orchestration</div>
+        <div class="plinks">
+          <a class="btn" href="https://landing-mu-nine-76.vercel.app/" target="_blank" rel="noopener">See it live</a>
+          <a class="btn ghost" href="https://github.com/RajatPM07/LennyLive" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="project">
+        <h4>personal-finance-agent</h4>
+        <div class="win">Single user production deployment, runs continuously</div>
+        <p>A solo Python build that uses Gmail integration to fetch and parse financial data into a Supabase store, surfaced through a Telegram bot for personal cash flow tracking. Not a demo, a system I rely on every day.</p>
+        <div class="stack">Python &middot; Gmail integration &middot; Supabase &middot; Telegram bot</div>
+        <div class="plinks">
+          <a class="btn ghost" href="https://github.com/RajatPM07/personal-finance-agent" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk about agentic travel.</h2>
+    <p style="max-width: 520px; margin: 0 auto; color: var(--muted);">Based in Mumbai, India. Happy to walk through any of this work in as much depth as you would like.</p>
+    <div class="contact">
+      <a class="chip" href="mailto:sharma.rajat70@gmail.com">&#9993; sharma.rajat70@gmail.com</a>
+      <a class="chip" href="tel:+917358467199">&#128222; +91 7358 467199</a>
+      <a class="chip" href="https://www.linkedin.com/in/rajat-sharma-70/" target="_blank" rel="noopener">in&nbsp; LinkedIn</a>
+      <a class="chip" href="https://github.com/RajatPM07" target="_blank" rel="noopener">&#11089; github.com/RajatPM07</a>
+    </div>
+    <p class="resume">Prefer a traditional format? A resume is available as an optional download, <a href="mailto:sharma.rajat70@gmail.com?subject=Resume%20request%2C%20Spotnana%20Staff%20PM">just ask</a> and I will send it right over.</p>
+  </div>
+</footer>
+
+</body>
+</html>
