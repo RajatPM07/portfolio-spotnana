@@ -64,7 +64,7 @@ export default function RolloutRail() {
                   className={`block rounded-full border-2 transition-all duration-200 ${isActive ? 'h-4 w-4 border-signal bg-signal' : passed ? 'h-3 w-3 border-teal bg-teal' : 'h-3 w-3 border-ink/50 bg-raised'}`}
                 />
                 <span
-                  className={`pointer-events-none absolute right-8 whitespace-nowrap rounded-full border border-ink/25 bg-raised px-3 py-1 font-mono text-xs uppercase tracking-wider text-ink shadow-card transition-opacity duration-200 ${isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100'}`}
+                  className={`pointer-events-none absolute right-8 whitespace-nowrap rounded-full border border-ink/25 bg-raised px-3 py-1 font-mono text-xs uppercase tracking-wider text-ink shadow-card transition-opacity duration-200 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100`}
                 >
                   {p.label}
                 </span>

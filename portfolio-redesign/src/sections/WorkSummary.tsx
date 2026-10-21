@@ -1,3 +1,7 @@
+import { RiaChart, TripChart, EngineChart } from '../components/MicroCharts'
+
+const charts = [RiaChart, TripChart, EngineChart]
+
 const summaries = [
   {
     n: '01',
@@ -51,18 +55,21 @@ export default function WorkSummary() {
 
         {/* On desktop each card is a subgrid over seven shared rows, so titles, outcomes and
             Built, Owned, Changed line up across cards. On smaller screens cards simply stack. */}
-        <div className="mt-10 grid gap-5 md:mt-14 lg:grid-cols-3 lg:grid-rows-[repeat(7,auto)] lg:gap-y-0">
-          {summaries.map((s) => (
+        <div className="mt-10 grid gap-5 md:mt-14 lg:grid-cols-3 lg:grid-rows-[repeat(8,auto)] lg:gap-y-0">
+          {summaries.map((s, idx) => {
+          const Chart = charts[idx]
+          return (
             <a
               key={s.n}
               href={s.href}
-              className="group flex flex-col rounded-2xl border border-ink/15 bg-raised p-6 shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-card-lift focus-visible:-translate-y-1 focus-visible:shadow-card-lift focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal motion-reduce:transform-none motion-reduce:transition-none md:p-7 lg:row-span-7 lg:grid lg:grid-rows-subgrid"
+              className="group flex flex-col rounded-2xl border border-ink/15 bg-raised p-6 shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-card-lift focus-visible:-translate-y-1 focus-visible:shadow-card-lift focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal motion-reduce:transform-none motion-reduce:transition-none md:p-7 lg:row-span-8 lg:grid lg:grid-rows-subgrid"
             >
               <div className="font-mono text-xs uppercase tracking-[0.12em] text-ink-soft">
                 Case {s.n} <span aria-hidden>/</span> {s.sector}
               </div>
               <h3 className="mt-3 text-[1.7rem] font-semibold leading-tight text-ink md:text-[1.9rem]">{s.name}</h3>
-              <p className="mb-5 mt-2 text-xl font-semibold leading-snug text-teal">{s.headline}</p>
+              <p className="mt-2 text-xl font-semibold leading-snug text-teal">{s.headline}</p>
+              <div className="mb-5 mt-4 min-h-[88px]"><Chart /></div>
 
               {rows.map(([label, key], i) => (
                 <div key={key} className={`border-t border-ink/15 py-3 ${i === 0 ? 'lg:border-t' : ''}`}>
@@ -75,7 +82,7 @@ export default function WorkSummary() {
                 Read the case <span aria-hidden>→</span>
               </span>
             </a>
-          ))}
+          )})}
         </div>
       </div>
     </section>
