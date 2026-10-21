@@ -16,7 +16,6 @@ type Card = {
   scope: string[]
   stats: { big: string; label: string }[]
   chart: ReactNode
-  reel?: { src: string; poster: string; label: string; caption: string }
   rows: [string, string][]
   visual?: { label: string; node: ReactNode }
   note?: string
@@ -62,13 +61,30 @@ const enginePipeline = (
   </div>
 )
 
+// Reel versions. A: big number. B: product moments. C: gates. none: the static micro chart.
+// Dev only: /?reel=a|b|c|none overrides. VITE_REEL sets the production default.
+type ReelVariant = 'a' | 'b' | 'c' | 'none'
+const REEL_IDS: Record<string, string> = { ria: 'ria', tripsecure: 'trip', elevate: 'elevate', engine: 'engine' }
+const REEL_LABELS: Record<string, string> = {
+  ria: 'Reel: Ria, from 3 hours to 20 minutes per case',
+  tripsecure: 'Reel: TripSecure+, from US$12M to US$36M annual GWP',
+  elevate: 'Reel: Elevate, market share from 2.3 percent to 3.1 percent',
+  engine: 'Reel: the recommendation engine, attach from 1.5 percent to 8 percent',
+}
+function pickReel(): ReelVariant {
+  const env = import.meta.env.VITE_REEL
+  const fallback: ReelVariant = env === 'a' || env === 'b' || env === 'c' || env === 'none' ? env : 'a'
+  if (!import.meta.env.DEV) return fallback
+  const q = new URLSearchParams(window.location.search).get('reel')
+  return q === 'a' || q === 'b' || q === 'c' || q === 'none' ? q : fallback
+}
+
 const cards: Card[] = [
   {
     id: 'ria', n: '01', category: 'Health insurance, AI underwriting', name: 'Ria', status: 'Phase 2 live',
     scope: ['Sole IC PM', '8 teams', '5 platforms', 'Pilot in 2 months'],
     stats: [{ big: '3 hours to minutes', label: 'per non standard case' }, { big: '95% agreement', label: 'AI to underwriter, vs a 92% bar' }],
     chart: <RiaChart />,
-    reel: { src: '/reels/ria.mp4', poster: '/reels/ria-poster.jpg', label: 'Reel: review cases flow through the 92% bar and collapse from about 3 hours to minutes', caption: 'Illustrative, not actual product UI' },
     rows: [
       ['Problem', 'About 45% of monthly health insurance proposals were non standard and needed manual underwriting review, about 3 hours per case.'],
       ['My ownership', 'Sole individual contributor PM, from definition to pilot in 2 months, across 8 teams and 5 integrated platforms, at CXO level priority.'],
@@ -116,6 +132,7 @@ const cards: Card[] = [
 ]
 
 export default function CaseDeck() {
+  const reelVariant = pickReel()
   const [active, setActive] = useState(0)
   const [flipped, setFlipped] = useState<string | null>(null)
   const [tab, setTab] = useState<Record<string, 'story' | 'visual'>>({})
@@ -256,10 +273,15 @@ export default function CaseDeck() {
                       ))}
                     </div>
                     <div className="mt-5">
-                      {c.reel ? (
+                      {reelVariant !== 'none' ? (
                         <div>
-                          <ReelPlayer src={c.reel.src} poster={c.reel.poster} active={isActive && !isFlipped} label={c.reel.label} />
-                          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft">{c.reel.caption}</p>
+                          <ReelPlayer
+                            src={`/reels/${reelVariant}-${REEL_IDS[c.id]}.mp4`}
+                            poster={`/reels/${reelVariant}-${REEL_IDS[c.id]}.jpg`}
+                            active={isActive && !isFlipped}
+                            label={REEL_LABELS[c.id]}
+                          />
+                          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft">Illustrative, not actual product UI</p>
                         </div>
                       ) : c.chart}
                     </div>
