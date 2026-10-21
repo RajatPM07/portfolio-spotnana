@@ -121,6 +121,8 @@ export default function CaseDeck() {
   const [stageW, setStageW] = useState(1200)
   const reduced = useMatchMedia('(prefers-reduced-motion: reduce)')
   const n = cards.length
+  const activeRef = useRef(0)
+  activeRef.current = active
 
   useEffect(() => {
     const el = stageRef.current
@@ -149,12 +151,29 @@ export default function CaseDeck() {
     return () => window.removeEventListener('hashchange', open)
   }, [go, reduced])
 
+  // Trackpad and mouse side scroll: a clear horizontal gesture moves one card, then waits.
+  const wheelLock = useRef(0)
+  useEffect(() => {
+    const el = stageRef.current
+    if (!el) return
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaX) < 24 || Math.abs(e.deltaX) < Math.abs(e.deltaY)) return
+      e.preventDefault()
+      const now = performance.now()
+      if (now - wheelLock.current < 650) return
+      wheelLock.current = now
+      go(activeRef.current + (e.deltaX > 0 ? 1 : -1))
+    }
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
+  }, [go])
+
   const cardW = Math.min(560, stageW * 0.86)
   const gap = Math.min(cardW * 0.78, stageW * 0.34)
 
   // swipe
   const startX = useRef<number | null>(null)
-  const onPointerDown = (e: React.PointerEvent) => { startX.current = e.clientX }
+  const onPointerDown = (e: React.PointerEvent) => { startX.current = (e.target as HTMLElement).closest('button, [role=tab]') ? null : e.clientX }
   const onPointerUp = (e: React.PointerEvent) => {
     if (startX.current === null) return
     const dx = e.clientX - startX.current
@@ -218,7 +237,6 @@ export default function CaseDeck() {
                     style={{ backfaceVisibility: 'hidden' }}
                     aria-hidden={!isActive || isFlipped}
                     {...(!isActive || isFlipped ? { inert: '' as unknown as boolean } : {})}
-                    onClick={() => { if (!isActive) go(i) }}
                   >
                     <div className="font-mono text-xs uppercase tracking-[0.12em] text-ink-soft">Case {c.n} <span aria-hidden>/</span> {c.category}</div>
                     <h3 className="mt-3 text-[2rem] font-semibold leading-tight text-ink md:text-[2.4rem]">{c.name}</h3>
@@ -238,11 +256,23 @@ export default function CaseDeck() {
                     <button
                       type="button"
                       onClick={() => setFlipped(c.id)}
+                      tabIndex={isActive ? 0 : -1}
                       className="mt-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-teal px-5 py-3 text-base font-semibold text-teal transition-colors hover:bg-teal/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
                     >
                       <RotateCw size={18} aria-hidden /> Flip for the story
                     </button>
                   </div>
+
+                  {/* Side cards: one big button over the whole card brings it forward. It sits outside the inert faces. */}
+                  {!isActive && abs <= 1 && (
+                    <button
+                      type="button"
+                      aria-label={`Show case ${c.n}: ${c.name}`}
+                      onClick={() => go(i)}
+                      className="absolute inset-0 z-20 cursor-pointer rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal"
+                      style={{ transform: 'translateZ(2px)' }}
+                    />
+                  )}
 
                   {/* Back */}
                   <div
