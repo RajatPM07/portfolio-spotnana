@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, RotateCw } from 'lucide-react'
 import { Gate, Phase, Tag } from '../components/GateRail'
 import { RiaChart, TripChart, EngineChart, ShareChart } from '../components/MicroCharts'
 import { useMatchMedia } from '../components/usePointerDepth'
+import ReelPlayer from '../components/ReelPlayer'
 
 type Card = {
   id: string
@@ -15,6 +16,7 @@ type Card = {
   scope: string[]
   stats: { big: string; label: string }[]
   chart: ReactNode
+  reel?: { src: string; poster: string; label: string; caption: string }
   rows: [string, string][]
   visual?: { label: string; node: ReactNode }
   note?: string
@@ -66,6 +68,7 @@ const cards: Card[] = [
     scope: ['Sole IC PM', '8 teams', '5 platforms', 'Pilot in 2 months'],
     stats: [{ big: '3 hours to minutes', label: 'per non standard case' }, { big: '95% agreement', label: 'AI to underwriter, vs a 92% bar' }],
     chart: <RiaChart />,
+    reel: { src: '/reels/ria.mp4', poster: '/reels/ria-poster.jpg', label: 'Reel: review cases flow through the 92% bar and collapse from about 3 hours to minutes', caption: 'Illustrative, not actual product UI' },
     rows: [
       ['Problem', 'About 45% of monthly health insurance proposals were non standard and needed manual underwriting review, about 3 hours per case.'],
       ['My ownership', 'Sole individual contributor PM, from definition to pilot in 2 months, across 8 teams and 5 integrated platforms, at CXO level priority.'],
@@ -202,7 +205,7 @@ export default function CaseDeck() {
           }}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
-          className="relative mx-auto mt-10 h-[720px] select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal md:mt-14 md:h-[760px]"
+          className="relative mx-auto mt-10 h-[790px] select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal md:mt-14 md:h-[830px]"
           style={{ perspective: 1700, touchAction: 'pan-y' }}
         >
           {/* A soft floor under the deck. */}
@@ -220,7 +223,7 @@ export default function CaseDeck() {
               <motion.div
                 key={c.id}
                 className="absolute left-1/2 top-0"
-                style={{ width: cardW, height: 'min(640px, 92%)', marginLeft: -cardW / 2, transformStyle: 'preserve-3d', zIndex: 10 - abs * 2, pointerEvents: abs > 1 ? 'none' : 'auto' }}
+                style={{ width: cardW, height: 'min(710px, 94%)', marginLeft: -cardW / 2, transformStyle: 'preserve-3d', zIndex: 10 - abs * 2, pointerEvents: abs > 1 ? 'none' : 'auto' }}
                 initial={false}
                 animate={{ x: o * gap, rotateY: -o * 36, scale: 1 - 0.12 * abs, z: -abs * 140, opacity: abs > 1 ? 0 : 1 - abs * 0.35 }}
                 transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 140, damping: 22, mass: 0.9 }}
@@ -252,7 +255,14 @@ export default function CaseDeck() {
                         </div>
                       ))}
                     </div>
-                    <div className="mt-5">{c.chart}</div>
+                    <div className="mt-5">
+                      {c.reel ? (
+                        <div>
+                          <ReelPlayer src={c.reel.src} poster={c.reel.poster} active={isActive && !isFlipped} label={c.reel.label} />
+                          <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft">{c.reel.caption}</p>
+                        </div>
+                      ) : c.chart}
+                    </div>
                     <button
                       type="button"
                       onClick={() => setFlipped(c.id)}
