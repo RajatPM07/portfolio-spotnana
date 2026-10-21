@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 const phases = [
   { id: 'top', label: 'Hook' },
   { id: 'work', label: 'Evidence' },
-  { id: 'ria', label: 'Cases' },
+  { id: 'cases', label: 'Cases' },
   { id: 'builder', label: 'Builder' },
   { id: 'about', label: 'About and contact' },
 ]

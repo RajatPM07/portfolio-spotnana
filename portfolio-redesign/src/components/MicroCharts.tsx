@@ -89,3 +89,26 @@ export function EngineChart() {
     </div>
   )
 }
+
+// Elevate: market share, the two real numbers at true proportion (2.3 to 3.1).
+export function ShareChart() {
+  const { ref, on } = usePlayOnce()
+  const bar = (label: string, value: number, strong: boolean, delay: number) => (
+    <div className="flex items-center gap-3">
+      <span className="w-14 flex-none font-mono text-xs uppercase tracking-wider text-ink-soft">{label}</span>
+      <div className="relative h-4 flex-1 rounded-sm bg-ink/10">
+        <div className="h-full origin-left rounded-sm" style={{ width: `${(value / 3.1) * 100}%`, transform: `scaleX(${on ? 1 : 0})`, backgroundColor: strong ? '#126879' : 'rgba(32,36,34,0.55)', transition: `transform 900ms ${ease} ${delay}ms` }} />
+      </div>
+      <span className="w-12 flex-none text-right text-base font-semibold text-ink">{value}%</span>
+    </div>
+  )
+  return (
+    <div ref={ref} role="img" aria-label="Chart: market share grew from 2.3 percent to 3.1 percent, to scale.">
+      <div className="flex flex-col gap-2">
+        {bar('FY23', 2.3, false, 300)}
+        {bar('FY25', 3.1, true, 700)}
+      </div>
+      <Caption>Market share, to scale</Caption>
+    </div>
+  )
+}

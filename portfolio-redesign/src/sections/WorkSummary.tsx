@@ -27,7 +27,7 @@ const summaries = [
     n: '03',
     sector: 'Health portfolio and personalization',
     name: 'Recommendation engine',
-    href: '#elevate',
+    href: '#engine',
     headline: 'Cross sell acceptance up 5.3x',
     built: 'ML for churn and cross sell, in checkout.',
     owned: 'Partnered with applied science.',

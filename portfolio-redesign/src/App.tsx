@@ -5,7 +5,7 @@ import HeroC from './sections/HeroC'
 import HeroD from './sections/HeroD'
 import RolloutRail from './components/RolloutRail'
 import WorkSummary from './sections/WorkSummary'
-import CaseStudies from './sections/CaseStudies'
+import CaseDeck from './sections/CaseDeck'
 import BuilderSection from './sections/BuilderSection'
 import AboutSection from './sections/AboutSection'
 import ContactSection from './sections/ContactSection'
@@ -43,7 +43,7 @@ export default function App() {
         <HeroD />
       )}
       <WorkSummary />
-      <CaseStudies />
+      <CaseDeck />
       <BuilderSection />
       <AboutSection />
       <ContactSection />
