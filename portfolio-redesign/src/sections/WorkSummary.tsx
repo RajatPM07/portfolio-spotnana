@@ -9,9 +9,9 @@ const summaries = [
     name: 'Ria',
     href: '#ria',
     headline: '3 hours to minutes per case',
-    built: 'AI underwriting review for non standard health proposals.',
-    owned: 'Sole IC PM across 8 teams and 5 platforms, from definition to pilot in 2 months.',
-    changed: '95% agreement with underwriters against a 92% bar.',
+    built: 'AI review of non standard proposals.',
+    owned: 'Sole IC PM, 8 teams, 5 platforms.',
+    changed: '95% agreement vs a 92% bar.',
   },
   {
     n: '02',
@@ -19,9 +19,9 @@ const summaries = [
     name: 'TripSecure+',
     href: '#tripsecure',
     headline: 'Profitable in 6 months',
-    built: 'A new travel insurance product replacing a decade old offering.',
-    owned: 'Discovery to launch with a 10 person cross functional team.',
-    changed: 'Revenue from ₹100 crore to ₹300 crore in 18 months.',
+    built: 'New product replacing a decade old one.',
+    owned: 'Discovery to launch, 10 person team.',
+    changed: '₹100 cr to ₹300 cr in 18 months.',
   },
   {
     n: '03',
@@ -29,9 +29,9 @@ const summaries = [
     name: 'Recommendation engine',
     href: '#elevate',
     headline: 'Cross sell acceptance up 5.3x',
-    built: 'Production ML for churn risk and cross sell, surfaced in checkout.',
-    owned: 'Partnered with applied science on features, evaluation, and guardrails.',
-    changed: 'Acceptance from 1.5% to 8%, with a 10% ARPU lift.',
+    built: 'ML for churn and cross sell, in checkout.',
+    owned: 'Partnered with applied science.',
+    changed: '1.5% to 8%, with a 10% ARPU lift.',
   },
 ]
 
@@ -51,7 +51,7 @@ export default function WorkSummary() {
         <h2 className="font-semibold leading-none text-ink" style={{ fontSize: 'clamp(2.4rem, 5.4vw, 4.4rem)' }}>
           Selected work
         </h2>
-        <p className="mt-4 max-w-2xl text-lg font-normal leading-relaxed text-ink-soft">Three products I took to production. Open one to read the full case.</p>
+        <p className="mt-4 max-w-2xl text-lg font-normal leading-relaxed text-ink-soft">Three products I took to production.</p>
 
         {/* On desktop each card is a subgrid over seven shared rows, so titles, outcomes and
             Built, Owned, Changed line up across cards. On smaller screens cards simply stack. */}
@@ -69,12 +69,12 @@ export default function WorkSummary() {
               </div>
               <h3 className="mt-3 text-[1.7rem] font-semibold leading-tight text-ink md:text-[1.9rem]">{s.name}</h3>
               <p className="mt-2 text-xl font-semibold leading-snug text-teal">{s.headline}</p>
-              <div className="mb-5 mt-4 min-h-[88px]"><Chart /></div>
+              <div className="mb-5 mt-4 min-h-[76px]"><Chart /></div>
 
-              {rows.map(([label, key], i) => (
-                <div key={key} className={`border-t border-ink/15 py-3 ${i === 0 ? 'lg:border-t' : ''}`}>
+              {rows.map(([label, key]) => (
+                <div key={key} className="border-t border-ink/15 py-2.5">
                   <div className="font-mono text-xs uppercase tracking-[0.12em] text-teal">{label}</div>
-                  <p className="mt-1 text-[17px] font-normal leading-relaxed text-ink">{s[key]}</p>
+                  <p className="mt-0.5 text-[17px] font-medium leading-snug text-ink">{s[key]}</p>
                 </div>
               ))}
 

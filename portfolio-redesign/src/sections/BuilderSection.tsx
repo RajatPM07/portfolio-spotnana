@@ -5,7 +5,7 @@ const projects = [
   {
     name: 'Lenny Live',
     win: 'First place, Lenny\'s Data Competition 2026',
-    text: 'A Chrome extension built as an ambient AI mentor. It surfaces product advice over a curated corpus of Lenny Rachitsky\'s newsletter and podcast transcripts, in a cloned voice, while you are inside the problem.',
+    text: 'A Chrome extension that works as an ambient AI mentor over Lenny Rachitsky\'s newsletter and podcast transcripts.',
     chips: ['Chrome extension', 'RAG', 'Supabase pgvector', 'ElevenLabs', 'Agentic orchestration'],
     links: [
       { label: 'Live', href: 'https://landing-mu-nine-76.vercel.app/' },
@@ -15,14 +15,14 @@ const projects = [
   {
     name: 'personal-finance-agent',
     win: 'Single user production deployment, runs continuously',
-    text: 'A solo Python build. Gmail integration parses financial data into Supabase, surfaced through a Telegram bot. Not a demo, a system I rely on every day.',
+    text: 'Solo Python build: Gmail data into Supabase, surfaced through a Telegram bot I use daily.',
     chips: ['Python', 'Gmail', 'Supabase', 'Telegram bot'],
     links: [{ label: 'GitHub', href: 'https://github.com/RajatPM07/personal-finance-agent' }],
   },
   {
     name: 'Bima Brain',
     win: 'Top 20, GrowthX x Sarvam AI Epoch Hackathon',
-    text: 'A solo build: voice underwriting in Hindi or English. It asks about a declared condition one adaptive question at a time, and ends in one of four outcomes. The premium stays blocked until the customer hears the real price and agrees.',
+    text: 'Solo voice underwriting in Hindi or English. The premium stays blocked until the customer hears and agrees to the price.',
     chips: ['Python', 'Sarvam AI', 'Voice underwriting', 'Hindi and English'],
     links: [{ label: 'Project', href: 'https://built.growthx.club/projects/bima-brain-voice-underwriting-for-every-indian-language' }],
   },

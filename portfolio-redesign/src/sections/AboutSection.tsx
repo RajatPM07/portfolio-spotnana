@@ -11,7 +11,7 @@ export default function AboutSection() {
         </FadeIn>
         <FadeIn duration={0.5} delay={0.1}>
           <p className="max-w-2xl text-lg font-normal leading-relaxed text-mist md:text-xl">
-            Senior product manager at ICICI Lombard General Insurance in Mumbai, with about seven to eight years across InsurTech, AdTech and AI and ML. Before that I was a PM for claims experience at Acko, an AdTech PM at Mediaqart, and a product analyst at SHL. I take products from a blank page to production, and I care as much about governance and measured results as about shipping.
+            Senior product manager at ICICI Lombard in Mumbai, with about seven to eight years across InsurTech, AdTech and AI. I take products from a blank page to production, and care as much about governance as about shipping.
           </p>
         </FadeIn>
       </div>

@@ -229,17 +229,24 @@ export default function CaseStudies() {
               <div className="flex flex-col gap-10">
                 {c.groups.map((g, gi) => (
                   <div key={gi}>
-                    {g.label && <h4 className="mb-3 text-2xl font-semibold text-ink">{g.label}</h4>}
-                    <dl>
-                      {g.rows.map(([label, text]) => (
-                        <Row key={label} label={label}>
-                          {text}
-                        </Row>
-                      ))}
-                      {gi === 0 && c.tradeoff && <Row label="Tradeoff">{c.tradeoff}</Row>}
-                    </dl>
-                    {g.note && <p className="mt-4 max-w-[62ch] border-l-2 border-teal pl-4 text-[17px] leading-relaxed text-ink-soft">{g.note}</p>}
-                    {g.extra && <div className="mt-6 rounded-2xl border border-ink/15 bg-paper/70 p-5 md:p-7">{g.extra}</div>}
+                    {g.label && <h4 className="mb-4 text-2xl font-semibold text-ink">{g.label}</h4>}
+                    {g.note && <p className="mb-5 max-w-[62ch] border-l-2 border-teal pl-4 text-[17px] leading-relaxed text-ink-soft">{g.note}</p>}
+                    {g.extra && <div className="mb-5 rounded-2xl border border-ink/15 bg-paper/70 p-5 md:p-7">{g.extra}</div>}
+                    <details className="group rounded-2xl border border-ink/15 bg-raised/60 open:bg-raised">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-5 py-4 text-base font-semibold text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal [&::-webkit-details-marker]:hidden">
+                        <span>Read the full story</span>
+                        <span aria-hidden className="font-mono text-lg leading-none transition-transform duration-200 group-open:rotate-45">+</span>
+                      </summary>
+                      <dl className="px-5 pb-3">
+                        {g.rows.map(([label, text]) => (
+                          <Row key={label} label={label}>
+                            {text}
+                          </Row>
+                        ))}
+                        {gi === 0 && c.tradeoff && <Row label="Tradeoff">{c.tradeoff}</Row>}
+                      </dl>
+                    </details>
+
                   </div>
                 ))}
               </div>
