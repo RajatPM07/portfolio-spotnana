@@ -33,15 +33,15 @@ function Caption({ children }: { children: string }) {
 export function RiaChart() {
   const { ref, on } = usePlayOnce()
   return (
-    <div ref={ref} role="img" aria-label="Chart: about 3 hours per case before, minutes now. Illustrative, not to scale.">
+    <div ref={ref} role="img" aria-label="Chart: 3 hours per case before, 20 minutes now, to scale.">
       <div className="flex items-baseline justify-between font-mono text-xs uppercase tracking-wider text-ink">
-        <span>Before: about 3 hours</span>
-        <span className="text-teal">Now: minutes</span>
+        <span>Before: 3 hours</span>
+        <span className="text-teal">Now: 20 minutes</span>
       </div>
       <div className="mt-2 h-3 overflow-hidden rounded-sm bg-ink/10">
-        <div className="h-full origin-left rounded-sm bg-ink/70" style={{ width: '100%', transform: `scaleX(${on ? 0.05 : 1})`, backgroundColor: on ? '#126879' : undefined, transition: `transform 900ms ${ease} 450ms, background-color 600ms ease 450ms` }} />
+        <div className="h-full origin-left rounded-sm bg-ink/70" style={{ width: '100%', transform: `scaleX(${on ? 0.111 : 1})`, backgroundColor: on ? '#126879' : undefined, transition: `transform 900ms ${ease} 450ms, background-color 600ms ease 450ms` }} />
       </div>
-      <Caption>Illustrative, not to scale</Caption>
+      <Caption>Decision time, to scale</Caption>
     </div>
   )
 }
@@ -72,7 +72,7 @@ export function EngineChart() {
   const { ref, on } = usePlayOnce()
   const bar = (label: string, value: number, strong: boolean, delay: number) => (
     <div className="flex items-center gap-3">
-      <span className="w-14 flex-none font-mono text-xs uppercase tracking-wider text-ink-soft">{label}</span>
+      <span className="w-24 flex-none font-mono text-xs uppercase tracking-wider text-ink-soft">{label}</span>
       <div className="relative h-4 flex-1 rounded-sm bg-ink/10">
         <div className="h-full origin-left rounded-sm" style={{ width: `${(value / 8) * 100}%`, transform: `scaleX(${on ? 1 : 0})`, backgroundColor: strong ? '#126879' : 'rgba(32,36,34,0.55)', transition: `transform 900ms ${ease} ${delay}ms` }} />
       </div>
@@ -80,12 +80,12 @@ export function EngineChart() {
     </div>
   )
   return (
-    <div ref={ref} role="img" aria-label="Chart: cross sell acceptance rose from 1.5 percent to 8 percent, to scale.">
+    <div ref={ref} role="img" aria-label="Chart: attach in an A/B test, 1.5 percent for rule based targeting, 8 percent for the ML model, to scale.">
       <div className="flex flex-col gap-2">
-        {bar('Before', 1.5, false, 300)}
-        {bar('Now', 8, true, 700)}
+        {bar('Rule based', 1.5, false, 300)}
+        {bar('ML model', 8, true, 700)}
       </div>
-      <Caption>Cross sell acceptance, to scale</Caption>
+      <Caption>Attach in A/B test, to scale</Caption>
     </div>
   )
 }

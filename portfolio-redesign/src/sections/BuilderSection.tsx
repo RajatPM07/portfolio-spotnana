@@ -21,9 +21,9 @@ const projects = [
   },
   {
     name: 'Bima Brain',
-    win: 'Top 20, GrowthX x Sarvam AI Epoch Hackathon',
-    text: 'Solo voice underwriting in Hindi or English. The premium stays blocked until the customer hears and agrees to the price.',
-    chips: ['Python', 'Sarvam AI', 'Voice underwriting', 'Hindi and English'],
+    win: 'Sarvam Epoch Buildathon by GrowthX, July 2026',
+    text: 'Team build. A voice agent that runs adaptive medical underwriting calls in Hindi or English, with consent before any premium is charged.',
+    chips: ['Sarvam AI', 'Voice underwriting', 'Hindi and English'],
     links: [{ label: 'Project', href: 'https://built.growthx.club/projects/bima-brain-voice-underwriting-for-every-indian-language' }],
   },
 ]

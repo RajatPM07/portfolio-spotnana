@@ -12,8 +12,8 @@ const links = [
 ]
 
 const proof = [
-  { big: '95%', label: 'AI to underwriter agreement, Ria' },
-  { big: '₹100 cr to ₹300 cr', label: 'Revenue in 18 months, TripSecure+' },
+  { big: '3 hours to 20 min', label: 'Decision time on 45% of health cases, Ria' },
+  { big: 'US$12M to US$36M', label: 'Annual GWP in 18 months, TripSecure+' },
 ]
 
 // Hero D, "the aperture": order emerges where marks cross the gate (see CREATIVE_BRIEF.md).
