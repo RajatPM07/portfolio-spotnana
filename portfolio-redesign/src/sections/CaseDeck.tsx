@@ -3,8 +3,8 @@ import type { ReactNode } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronLeft, ChevronRight, RotateCw } from 'lucide-react'
 import { Gate, Phase, Tag } from '../components/GateRail'
-import { RiaChart, TripChart, EngineChart, ShareChart } from '../components/MicroCharts'
 import { useMatchMedia } from '../components/usePointerDepth'
+import ReelPlayer from '../components/ReelPlayer'
 
 type Card = {
   id: string
@@ -14,7 +14,6 @@ type Card = {
   status: string
   scope: string[]
   stats: { big: string; label: string }[]
-  chart: ReactNode
   rows: [string, string][]
   visual?: { label: string; node: ReactNode }
   note?: string
@@ -60,12 +59,20 @@ const enginePipeline = (
   </div>
 )
 
+// Each card front plays a short silent reel (version A, big number). Files: public/reels/a-<id>.mp4 and .jpg.
+const REEL_IDS: Record<string, string> = { ria: 'ria', tripsecure: 'trip', elevate: 'elevate', engine: 'engine' }
+const REEL_LABELS: Record<string, string> = {
+  ria: 'Reel: Ria, from 3 hours to 20 minutes per complex case',
+  tripsecure: 'Reel: TripSecure+, from US$12M to US$36M yearly premiums',
+  elevate: 'Reel: Elevate, market share from 2.3 percent to 3.1 percent in FY24 to 25',
+  engine: 'Reel: the recommendation engine, from 1.5 percent to 8 percent of customers adding the offer',
+}
+
 const cards: Card[] = [
   {
     id: 'ria', n: '01', category: 'Health insurance, AI assistant', name: 'Ria', status: 'Phase 2 live',
     scope: ['Sole product manager', '8 teams', '5 systems', 'Pilot in 2 months'],
-    stats: [{ big: '3 hours to 20 minutes', label: 'to approve a complex health application (45% of health cases)' }, { big: '95% agreement', label: 'AI matched the human experts on 8,400 cases, above their 92% bar' }, { big: '20 to 30 crore rupees', label: 'estimated cost saving from the AI assistant' }],
-    chart: <RiaChart />,
+    stats: [{ big: '95% agreement', label: 'AI matched the human experts on 8,400 cases, above their 92% bar' }, { big: '20 to 30 crore rupees', label: 'estimated cost saving from the AI assistant' }],
     rows: [
       ['Problem', 'About 45% of monthly health insurance applications were unusual and needed an expert (an underwriter, who decides whether to approve and price a policy) to review them by hand, about 3 hours per case.'],
       ['My ownership', 'Sole product manager, from idea to pilot in 2 months, across 8 teams and 5 connected systems, as a top priority for the company\'s senior leaders.'],
@@ -78,8 +85,7 @@ const cards: Card[] = [
   {
     id: 'tripsecure', n: '02', category: 'Travel insurance, built from scratch', name: 'TripSecure+', status: 'Shipped',
     scope: ['Strategy, roadmap, delivery', '10 person team', '10k policies a day'],
-    stats: [{ big: 'US$12M to US$36M', label: 'yearly premiums in 18 months, profitable in 6' }, { big: 'Claims cost 3.71 points lower', label: 'as a share of premiums, while the business tripled' }],
-    chart: <TripChart />,
+    stats: [{ big: 'Claims cost 3.71 points lower', label: 'as a share of premiums, while the business tripled' }],
     rows: [
       ['Problem', 'The old product was about 10 years old: rigid coverage, fixed outdated pricing, limited distribution, low awareness, no broker or partner availability, and a broken claims experience.'],
       ['My ownership', 'Owned strategy, roadmap and delivery. Led a 10 person cross functional team from discovery through launch, backed by 100+ traveller interviews.'],
@@ -93,7 +99,6 @@ const cards: Card[] = [
     id: 'elevate', n: '03', category: 'Health insurance strategy', name: 'Elevate', status: 'FY24 to 25',
     scope: ['Wrote the product specs', 'Mentored one associate PM'],
     stats: [{ big: 'Share now 5.1%', label: 'of the health market, up from 2.3% to 3.1% in FY24 to 25, a 35% relative gain' }, { big: 'US$180M', label: 'size of the health insurance business the strategy covered' }],
-    chart: <ShareChart />,
     rows: [
       ['My ownership', 'Wrote the product specs (PRDs) that defined what each plan covers and what it costs across customer groups, assessed the competition to see where the product stood, and mentored one associate PM until they owned their work.'],
       ['Outcome', 'The FY24 to 25 strategy grew market share from 2.3% to 3.1%, a 35% relative gain, on a US$180M health portfolio. Market share has since risen to 5.1%.'],
@@ -103,8 +108,7 @@ const cards: Card[] = [
   {
     id: 'engine', n: '04', category: 'Offers tailored to each customer', name: 'Recommendation engine', status: 'In production',
     scope: ['Worked with data scientists', 'Accuracy score 0.82 (AUC ROC)'],
-    stats: [{ big: '1.5% to 8%', label: 'of customers added the offer: old rules vs the new ML model, tested side by side' }, { big: 'Revenue per customer up 10%', label: 'without hurting renewals' }],
-    chart: <EngineChart />,
+    stats: [{ big: 'Revenue per customer up 10%', label: 'without hurting renewals' }],
     rows: [
       ['My ownership', 'Worked with data scientists on which customer signals to use, how to measure the model and the safety limits in production.'],
       ['Solution', 'A machine learning model in production using 10+ customer signals. It predicts at once who might leave and who might buy another product, and feeds a one click offer in checkout, shown to the customers the model picks.'],
@@ -205,7 +209,7 @@ export default function CaseDeck() {
           }}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
-          className="relative mx-auto mt-10 h-[780px] select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal md:mt-14 md:h-[820px]"
+          className="relative mx-auto mt-10 h-[810px] select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal md:mt-14 md:h-[850px]"
           style={{ perspective: 1700, touchAction: 'pan-y' }}
         >
           {/* A soft floor under the deck. */}
@@ -223,7 +227,7 @@ export default function CaseDeck() {
               <motion.div
                 key={c.id}
                 className="absolute left-1/2 top-0"
-                style={{ width: cardW, height: 'min(700px, 92%)', marginLeft: -cardW / 2, transformStyle: 'preserve-3d', zIndex: 10 - abs * 2, pointerEvents: abs > 1 ? 'none' : 'auto' }}
+                style={{ width: cardW, height: 'min(740px, 94%)', marginLeft: -cardW / 2, transformStyle: 'preserve-3d', zIndex: 10 - abs * 2, pointerEvents: abs > 1 ? 'none' : 'auto' }}
                 initial={false}
                 animate={{ x: o * gap, rotateY: -o * 36, scale: 1 - 0.12 * abs, z: -abs * 140, opacity: abs > 1 ? 0 : 1 - abs * 0.35 }}
                 transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 140, damping: 22, mass: 0.9 }}
@@ -255,7 +259,15 @@ export default function CaseDeck() {
                         </div>
                       ))}
                     </div>
-                    <div className="mt-5">{c.chart}</div>
+                    <div className="mt-5">
+                      <ReelPlayer
+                        src={`/reels/a-${REEL_IDS[c.id]}.mp4`}
+                        poster={`/reels/a-${REEL_IDS[c.id]}.jpg`}
+                        active={isActive && !isFlipped}
+                        label={REEL_LABELS[c.id]}
+                      />
+                      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft">Illustrative, not actual product UI</p>
+                    </div>
                     <button
                       type="button"
                       onClick={() => setFlipped(c.id)}

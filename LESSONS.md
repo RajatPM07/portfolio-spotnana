@@ -5,3 +5,5 @@
 - BSD sed on macOS needs `sed -i ''`. Edit with Python replace and assert the old string exists, so a missed match fails loudly.
 - Checkout of a new branch carries uncommitted files; commit only named paths so Rajat's own edits to CLAUDE.md and generic html never get swept in.
 - A test that clicks the first `[aria-selected=true]` can read the wrong tablist. Scope selectors by aria-label.
+- After switching branches several times, Vite dev served raw `@tailwind` directives (unstyled page). Restart the dev server before judging screenshots. A screenshot that is black with left aligned text means CSS did not load.
+- When a reel repeats a card stat, drop the stat from the card, or the card gets too tall on phones.
