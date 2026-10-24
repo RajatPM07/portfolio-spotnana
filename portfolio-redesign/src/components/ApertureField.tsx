@@ -115,7 +115,7 @@ export default function ApertureField({ x, reduced }: Props) {
       // The gate is the bar from the Ria case. Decorative label, drawn on the canvas.
       if (ease > 0.9 && h > 420) {
         ctx.font = '12px ui-monospace, Menlo, monospace'
-        const label = 'THE BAR, 92%'
+        const label = 'THE GATE'
         const ly = Math.max(112, y0 + 28)
         ctx.fillStyle = 'rgba(12,12,12,0.92)'
         ctx.fillRect(gx + 8, ly - 14, ctx.measureText(label).width + 12, 20)

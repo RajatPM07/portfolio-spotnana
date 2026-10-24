@@ -64,14 +64,14 @@ const cards: Card[] = [
   {
     id: 'ria', n: '01', category: 'Health insurance, AI underwriting', name: 'Ria', status: 'Phase 2 live',
     scope: ['Sole IC PM', '8 teams', '5 platforms', 'Pilot in 2 months'],
-    stats: [{ big: '3 hours to 20 minutes', label: 'decision time on 45% of health cases' }, { big: '95% agreement', label: 'on 8,400 cases, vs a 92% bar set by underwriting' }],
+    stats: [{ big: '3 hours to 20 minutes', label: 'decision time on 45% of health cases' }, { big: '95% agreement', label: 'on 8,400 cases, vs a 92% bar set by underwriting' }, { big: '20 to 30 crore rupees', label: 'estimated cost saving from the AI agent' }],
     chart: <RiaChart />,
     rows: [
       ['Problem', 'About 45% of monthly health insurance proposals were non standard and needed manual underwriting review, about 3 hours per case.'],
       ['My ownership', 'Sole individual contributor PM, from definition to pilot in 2 months, across 8 teams and 5 integrated platforms, at CXO level priority.'],
       ['Pivotal decision', 'Roll out in phases behind metric gates, not all at once. Start with 100% human review, then move to risk tiered review once LLM to underwriter agreement cleared its bar, with the dangerous miss rate targeted at near zero.'],
       ['Governance', 'Defined the decision thresholds, a human review fallback (low confidence cases routed to underwriters) and monitoring. Authored the responsible AI framework adopted as the engine team\'s standard: 7 domains, about 35 metrics.'],
-      ['Outcome', 'Decision time went from 3 hours to 20 minutes on 45% of health cases. Launch gated at 95% agreement with underwriter decisions on 8,400 cases (one week of cases), against a 92% acceptance threshold set by underwriting. Approvals of high risk or under loaded cases fell from 15% under manual review to 5%. Inference latency went from 3s to 1s. Projected: 20 to 30 crore rupees annual savings at full rollout.'],
+      ['Outcome', 'Decision time went from 3 hours to 20 minutes on 45% of health cases. Launch gated at 95% agreement with underwriter decisions on 8,400 cases (one week of cases), against a 92% acceptance threshold set by underwriting. Approvals of high risk or under loaded cases fell from 15% under manual review to 5%. Inference latency went from 3s to 1s. Estimated cost saving from the AI agent: about 20 to 30 crore rupees.'],
     ],
     visual: { label: 'Rollout gates', node: riaGates },
   },
@@ -92,11 +92,11 @@ const cards: Card[] = [
   {
     id: 'elevate', n: '03', category: 'Health portfolio strategy', name: 'Elevate', status: 'FY24 to 25',
     scope: ['PRDs for coverage and pricing', 'Mentored one APM'],
-    stats: [{ big: '2.3% to 3.1%', label: 'market share, a 35% relative gain' }, { big: 'US$180M', label: 'health portfolio the strategy covered' }],
+    stats: [{ big: 'Share now 5.1%', label: 'up from 2.3% to 3.1% in FY24 to 25, a 35% relative gain' }, { big: 'US$180M', label: 'health portfolio the strategy covered' }],
     chart: <ShareChart />,
     rows: [
       ['My ownership', 'Authored PRDs defining coverage architecture and pricing across segments, assessed the competitive landscape for positioning gaps, and mentored one Associate PM to independent ownership.'],
-      ['Outcome', 'The FY24 to 25 strategy grew market share from 2.3% to 3.1%, a 35% relative gain, on a US$180M health portfolio.'],
+      ['Outcome', 'The FY24 to 25 strategy grew market share from 2.3% to 3.1%, a 35% relative gain, on a US$180M health portfolio. Market share has since risen to 5.1%.'],
     ],
     note: 'This share gain belongs to the strategy as a whole. The recommendation engine is separate work, and is not credited with the full increase.',
   },

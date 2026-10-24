@@ -69,3 +69,10 @@ Reviewer stance: Yash Doshi, hiring Staff PMs for Agentic Travel Experiences. Br
 - Side card click: confirmed at 1440 and 1280x720 (Ria then TripSecure+). At 768 and 390 the side cards are not reachable by click in the test; arrows and tabs work. This was not changed in this branch.
 - Looked at screenshots: hero 1280, Ria and TripSecure+ and engine back faces at 1440, Selected Work 1440, About 1440, Ria back at 390, deck front 1440. Not looked at: other sizes' screenshots (saved in `/Users/rajat/Documents/Resume/portfolio-redesign-screens/pm-review/`).
 - Not run: contrast checks on the new About list; long Ria back face scrolls inside the card (focusable region added).
+
+## 7. Update from Rajat, 2026-10-24
+- Hero keeps "3 hours to 20 min" and US$12M to US$36M. The 95% and 92% are off the hero, including the canvas label (now "THE GATE"). Agreement rate stays in the Ria card and Selected Work.
+- Bima Brain: "Top 20" restored (confirmed by Rajat). Still a team build.
+- Market share is now 5.1% (Rajat). Elevate card and chart show 2.3%, 3.1% (FY24 to 25) and now 5.1%. The 35% relative gain stays tied to 2.3% to 3.1% only.
+- Ria: estimated cost saving of about 20 to 30 crore rupees, from the AI agent (Rajat's wording), added as a front stat. It is an estimate.
+- Questions 4 (Top 20) is answered. Still open: the date or period for the 5.1% share, and whether Rajat wants it in the resume.

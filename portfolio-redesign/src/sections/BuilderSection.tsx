@@ -21,7 +21,7 @@ const projects = [
   },
   {
     name: 'Bima Brain',
-    win: 'Sarvam Epoch Buildathon by GrowthX, July 2026',
+    win: 'Top 20, Sarvam Epoch Buildathon by GrowthX, July 2026',
     text: 'Team build. A voice agent that runs adaptive medical underwriting calls in Hindi or English, with consent before any premium is charged.',
     chips: ['Sarvam AI', 'Voice underwriting', 'Hindi and English'],
     links: [{ label: 'Project', href: 'https://built.growthx.club/projects/bima-brain-voice-underwriting-for-every-indian-language' }],
