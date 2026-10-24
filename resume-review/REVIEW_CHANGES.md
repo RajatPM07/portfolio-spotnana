@@ -76,3 +76,6 @@ Reviewer stance: Yash Doshi, hiring Staff PMs for Agentic Travel Experiences. Br
 - Market share is now 5.1% (Rajat). Elevate card and chart show 2.3%, 3.1% (FY24 to 25) and now 5.1%. The 35% relative gain stays tied to 2.3% to 3.1% only.
 - Ria: estimated cost saving of about 20 to 30 crore rupees, from the AI agent (Rajat's wording), added as a front stat. It is an estimate.
 - Questions 4 (Top 20) is answered. Still open: the date or period for the 5.1% share, and whether Rajat wants it in the resume.
+
+## 8. Plain language pass (2026-10-24)
+Audience: a recruiter outside fintech. Hero headline is now "I build AI that makes insurance decisions faster and safer." Proof lines say what happened in plain words with the exact term in small print underneath (45% of health cases; gross written premium, 10k policies a day). Card fronts, Selected Work and the card stories explain underwriter, GWP, loss ratio, ARPU, A/B test, cannibalization and PRD in brackets. Facts and numbers unchanged. The 15% to 5% sentence is quoted exactly as in the CV. Not simplified: Builder chips (RAG, pgvector) and the Ria gates and engine pipeline visuals on the back.

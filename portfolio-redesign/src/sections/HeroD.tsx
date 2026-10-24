@@ -12,8 +12,8 @@ const links = [
 ]
 
 const proof = [
-  { big: '3 hours to 20 min', label: 'Decision time on 45% of health cases, Ria' },
-  { big: 'US$12M to US$36M', label: 'Annual GWP in 18 months, TripSecure+' },
+  { big: '3 hours to 20 min', label: 'to approve a complex health insurance application, with an AI assistant I led (Ria)', fine: '45% of health cases' },
+  { big: 'US$12M to US$36M', label: 'in yearly insurance premiums from a travel product I owned, in 18 months', fine: 'Gross written premium, 10k policies a day' },
 ]
 
 // Hero D, "the aperture": order emerges where marks cross the gate (see CREATIVE_BRIEF.md).
@@ -50,8 +50,8 @@ export default function HeroD() {
             <div className="text-xl font-semibold uppercase tracking-wide text-mist md:text-2xl">Rajat Sharma</div>
             <div className="mt-1 text-sm font-medium uppercase tracking-wide text-mist/90 md:text-base">Senior Product Manager, ICICI Lombard</div>
           </div>
-          <h1 className="hero-heading-strong font-black uppercase leading-[0.98] tracking-tight" style={{ fontSize: 'clamp(2.5rem, 5.6vw, 5.4rem)' }}>
-            I build AI for high stakes decisions.
+          <h1 className="hero-heading-strong font-black uppercase leading-[0.98] tracking-tight" style={{ fontSize: 'clamp(2.3rem, 4.5vw, 4.4rem)' }}>
+            I build AI that makes insurance decisions faster and safer.
           </h1>
           <div className="flex flex-wrap gap-x-8 gap-y-4">
             {proof.map((p) => (
@@ -59,7 +59,8 @@ export default function HeroD() {
                 <div className="whitespace-nowrap font-black uppercase leading-none text-signal" style={{ fontSize: 'clamp(1.5rem, 2.3vw, 2.2rem)' }}>
                   {p.big}
                 </div>
-                <div className="mt-1.5 text-base font-normal text-mist/90">{p.label}</div>
+                <div className="mt-1.5 max-w-[26rem] text-base font-normal leading-snug text-mist/90">{p.label}</div>
+                <div className="mt-0.5 font-mono text-xs uppercase tracking-wider text-mist/60">{p.fine}</div>
               </div>
             ))}
           </div>

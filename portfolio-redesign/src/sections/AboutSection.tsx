@@ -2,7 +2,7 @@ import FadeIn from '../components/FadeIn'
 
 const earlier = [
   { co: 'Acko', role: 'Product Manager, Claims Experience', line: 'Withdrawn claims cut from 40% to 25%. Support calls per claim halved, 3.9 to 2.0, with a unified agent console.' },
-  { co: 'Mediaqart', role: 'Product Manager, AdTech', line: 'Launched MQ Sync 0 to 1, scaling to 1500+ retailers and 5 enterprise brands. Quarterly revenue up 15%.' },
+  { co: 'Mediaqart', role: 'Product Manager, advertising software (AdTech)', line: 'Launched MQ Sync 0 to 1, scaling to 1500+ retailers and 5 enterprise brands. Quarterly revenue up 15%.' },
   { co: 'SHL', role: 'Product Analyst', line: 'Assessment completion up 20% across 2.5M monthly users, through a warmup feature.' },
 ]
 

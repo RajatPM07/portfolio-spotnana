@@ -85,7 +85,7 @@ export function EngineChart() {
         {bar('Rule based', 1.5, false, 300)}
         {bar('ML model', 8, true, 700)}
       </div>
-      <Caption>Attach in A/B test, to scale</Caption>
+      <Caption>Customers who added the offer, to scale</Caption>
     </div>
   )
 }
