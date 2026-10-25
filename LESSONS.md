@@ -7,3 +7,6 @@
 - A test that clicks the first `[aria-selected=true]` can read the wrong tablist. Scope selectors by aria-label.
 - After switching branches several times, Vite dev served raw `@tailwind` directives (unstyled page). Restart the dev server before judging screenshots. A screenshot that is black with left aligned text means CSS did not load.
 - When a reel repeats a card stat, drop the stat from the card, or the card gets too tall on phones.
+- AUC ROC is not accuracy. Label it as model evaluation.
+- On phones, a flipped card with internal scroll and a tab hides the best evidence. Open stories in a full width reading panel instead, and put the diagram right after the story.
+- A video that plays only when its card is active still needs an IntersectionObserver, or it keeps playing after the reader scrolls away.

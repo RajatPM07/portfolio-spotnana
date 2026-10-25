@@ -20,10 +20,12 @@ const smooth = (a: number, b: number, v: number) => {
   return t * t * (3 - 2 * t)
 }
 
-type Props = { x: MotionValue<number>; reduced: boolean }
+type Props = { x: MotionValue<number>; reduced: boolean; label?: boolean }
 
-export default function ApertureField({ x, reduced }: Props) {
+export default function ApertureField({ x, reduced, label = true }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
+  const labelRef = useRef(label)
+  labelRef.current = label
   const reducedRef = useRef(reduced)
   const kick = useRef<() => void>(() => {})
 
@@ -113,7 +115,7 @@ export default function ApertureField({ x, reduced }: Props) {
       ctx.fillStyle = band
       ctx.fillRect(gx - 60, y0, 120, gh)
       // The gate is the bar from the Ria case. Decorative label, drawn on the canvas.
-      if (ease > 0.9 && h > 420) {
+      if (labelRef.current && ease > 0.9 && h > 420) {
         ctx.font = '12px ui-monospace, Menlo, monospace'
         const label = 'THE GATE'
         const ly = Math.max(112, y0 + 28)

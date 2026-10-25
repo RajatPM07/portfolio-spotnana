@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
-import { motion } from 'framer-motion'
-import { ChevronLeft, ChevronRight, RotateCw } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { BookOpen, ChevronLeft, ChevronRight, RotateCw, X } from 'lucide-react'
 import { Gate, Phase, Tag } from '../components/GateRail'
 import { useMatchMedia } from '../components/usePointerDepth'
 import ReelPlayer from '../components/ReelPlayer'
@@ -67,6 +67,13 @@ const REEL_LABELS: Record<string, string> = {
   elevate: 'Reel: Elevate, market share from 2.3 percent to 3.1 percent in FY24 to 25',
   engine: 'Reel: the recommendation engine, from 1.5 percent to 8 percent of customers adding the offer',
 }
+// The reel's essential context as real text, so it stays readable on a phone.
+const REEL_TEXT: Record<string, string> = {
+  ria: '3 hours before, 20 minutes now, to assess a complex health insurance application. Covers 45% of health cases.',
+  tripsecure: 'Yearly premiums grew from US$12M to US$36M in 18 months. Profitable in 6 months.',
+  elevate: 'FY24 to 25 result: market share from 2.3% to 3.1%, a 35% relative gain. Latest share: 5.1%.',
+  engine: 'In an A/B test, 1.5% of customers added the offer with the old rules and 8% with the ML model.',
+}
 
 const cards: Card[] = [
   {
@@ -96,22 +103,24 @@ const cards: Card[] = [
     note: 'The same shape as owning a booking flow end to end: discovery, pricing, distribution and the partner launch, as one product.',
   },
   {
-    id: 'elevate', n: '03', category: 'Health insurance strategy', name: 'Elevate', status: 'FY24 to 25',
+    id: 'elevate', n: '03', category: 'Health insurance strategy', name: 'Elevate', status: 'Strategy, FY24 to 25',
     scope: ['Wrote the product specs', 'Mentored one associate PM'],
-    stats: [{ big: 'Share now 5.1%', label: 'of the health market, up from 2.3% to 3.1% in FY24 to 25, a 35% relative gain' }, { big: 'US$180M', label: 'size of the health insurance business the strategy covered' }],
+    stats: [{ big: '5.1% latest share', label: 'of the health market today. The reel below shows the FY24 to 25 result.' }, { big: 'US$180M', label: 'size of the health insurance business the strategy covered' }],
     rows: [
       ['My ownership', 'Wrote the product specs (PRDs) that defined what each plan covers and what it costs across customer groups, assessed the competition to see where the product stood, and mentored one associate PM until they owned their work.'],
-      ['Outcome', 'The FY24 to 25 strategy grew market share from 2.3% to 3.1%, a 35% relative gain, on a US$180M health portfolio. Market share has since risen to 5.1%.'],
+      ['FY24 to 25 result', 'The strategy grew market share from 2.3% to 3.1%, a 35% relative gain, on a US$180M health portfolio.'],
+      ['Latest', 'Market share has since risen to 5.1%.'],
     ],
     note: 'This share gain belongs to the strategy as a whole. The recommendation engine is separate work, and is not credited with the full increase.',
   },
   {
     id: 'engine', n: '04', category: 'Offers tailored to each customer', name: 'Recommendation engine', status: 'In production',
-    scope: ['Worked with data scientists', 'Accuracy score 0.82 (AUC ROC)'],
+    scope: ['Partnered on customer signals, evaluation and production guardrails'],
     stats: [{ big: 'Revenue per customer up 10%', label: 'without hurting renewals' }],
     rows: [
-      ['My ownership', 'Worked with data scientists on which customer signals to use, how to measure the model and the safety limits in production.'],
+      ['My ownership', 'Partnered on customer signals, evaluation and production guardrails.'],
       ['Solution', 'A machine learning model in production using 10+ customer signals. It predicts at once who might leave and who might buy another product, and feeds a one click offer in checkout, shown to the customers the model picks.'],
+      ['Model evaluation', '0.82 AUC ROC (1.0 is perfect, 0.5 is chance).'],
       ['Test', 'A/B tested (two versions side by side) the ML offer against the old rule based targeting in the health insurance checkout. The model skips customers likely to leave.'],
       ['Outcome', '1.5% of customers added the offer under the old rules (control) and 8% under the model, 5.3x. Average revenue per customer (ARPU) up 10% without reducing core renewal conversion. Also: retention up 2.5% and an 18% click rate, with zero cannibalization (no loss) of the core purchase journey.'],
     ],
@@ -127,6 +136,11 @@ export default function CaseDeck() {
   const sectionRef = useRef<HTMLElement>(null)
   const [stageW, setStageW] = useState(1200)
   const reduced = useMatchMedia('(prefers-reduced-motion: reduce)')
+  // On phones the story opens in a full width reading panel instead of the narrow flipped card.
+  const narrow = useMatchMedia('(max-width: 767px)')
+  const [sheet, setSheet] = useState<string | null>(null)
+  const sheetReturn = useRef<HTMLElement | null>(null)
+  const closeSheet = useCallback(() => { setSheet(null); sheetReturn.current?.focus() }, [])
   const n = cards.length
   const activeRef = useRef(0)
   activeRef.current = active
@@ -194,7 +208,7 @@ export default function CaseDeck() {
       <div className="relative z-10 mx-auto max-w-[1280px]">
         <div className="border-t border-ink/20 pt-14 md:pt-20">
           <h2 className="font-semibold leading-none text-ink" style={{ fontSize: 'clamp(2.4rem, 5.4vw, 4.4rem)' }}>Case studies</h2>
-          <p className="mt-4 max-w-xl text-lg text-ink-soft">Four cards. Pick one, then flip it for the story.</p>
+          <p className="mt-4 max-w-xl text-lg text-ink-soft">Four cards. Pick one, then open its story.</p>
         </div>
 
         <div
@@ -209,7 +223,7 @@ export default function CaseDeck() {
           }}
           onPointerDown={onPointerDown}
           onPointerUp={onPointerUp}
-          className="relative mx-auto mt-10 h-[810px] select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal md:mt-14 md:h-[850px]"
+          className="relative mx-auto mt-10 h-[900px] select-none outline-none focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal md:mt-14 md:h-[850px]"
           style={{ perspective: 1700, touchAction: 'pan-y' }}
         >
           {/* A soft floor under the deck. */}
@@ -227,7 +241,7 @@ export default function CaseDeck() {
               <motion.div
                 key={c.id}
                 className="absolute left-1/2 top-0"
-                style={{ width: cardW, height: 'min(740px, 94%)', marginLeft: -cardW / 2, transformStyle: 'preserve-3d', zIndex: 10 - abs * 2, pointerEvents: abs > 1 ? 'none' : 'auto' }}
+                style={{ width: cardW, height: narrow ? 'min(860px, 96%)' : 'min(740px, 94%)', marginLeft: -cardW / 2, transformStyle: 'preserve-3d', zIndex: 10 - abs * 2, pointerEvents: abs > 1 ? 'none' : 'auto' }}
                 initial={false}
                 animate={{ x: o * gap, rotateY: -o * 36, scale: 1 - 0.12 * abs, z: -abs * 140, opacity: abs > 1 ? 0 : 1 - abs * 0.35 }}
                 transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 140, damping: 22, mass: 0.9 }}
@@ -266,15 +280,16 @@ export default function CaseDeck() {
                         active={isActive && !isFlipped}
                         label={REEL_LABELS[c.id]}
                       />
-                      <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.1em] text-ink-soft">Illustrative, not actual product UI</p>
+                      <p className="mt-2 text-[15px] leading-snug text-ink">{REEL_TEXT[c.id]}</p>
                     </div>
                     <button
                       type="button"
-                      onClick={() => setFlipped(c.id)}
+                      onClick={(e) => { if (narrow) { sheetReturn.current = e.currentTarget; setSheet(c.id) } else setFlipped(c.id) }}
                       tabIndex={isActive ? 0 : -1}
+                      aria-haspopup={narrow ? 'dialog' : undefined}
                       className="mt-auto inline-flex items-center justify-center gap-2 rounded-full border-2 border-teal px-5 py-3 text-base font-semibold text-teal transition-colors hover:bg-teal/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
                     >
-                      <RotateCw size={18} aria-hidden /> Flip for the story
+                      {narrow ? <><BookOpen size={18} aria-hidden /> Read the story</> : <><RotateCw size={18} aria-hidden /> Flip for the story</>}
                     </button>
                   </div>
 
@@ -348,6 +363,83 @@ export default function CaseDeck() {
           <button type="button" aria-label="Next case" onClick={() => go(active + 1)} className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-ink/40 text-ink transition-colors hover:bg-ink/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal"><ChevronRight size={20} /></button>
         </div>
       </div>
+      <AnimatePresence>
+        {sheet && (
+          <StorySheet key={sheet} card={cards.find((c) => c.id === sheet)!} reduced={reduced} onClose={closeSheet} />
+        )}
+      </AnimatePresence>
     </section>
+  )
+}
+
+// Phone reading panel: the whole story in one scroll, with the rollout gates or pipeline right after it.
+function StorySheet({ card: c, reduced, onClose }: { card: Card; reduced: boolean; onClose: () => void }) {
+  const panelRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+  const visualRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+      if (e.key !== 'Tab' || !panelRef.current) return
+      const items = panelRef.current.querySelectorAll<HTMLElement>('button, a[href], [tabindex="0"]')
+      const first = items[0], last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus() }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus() }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [onClose])
+
+  return (
+    <motion.div
+      ref={panelRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={`sheet-${c.id}`}
+      className="fixed inset-0 z-[60] flex flex-col bg-raised"
+      initial={reduced ? false : { y: '100%' }}
+      animate={{ y: 0 }}
+      exit={reduced ? { opacity: 0 } : { y: '100%' }}
+      transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 260, damping: 32 }}
+    >
+      <div className="flex items-start justify-between gap-3 border-b border-ink/15 px-5 pb-3 pt-5">
+        <div>
+          <div className="font-mono text-xs uppercase tracking-[0.12em] text-ink-soft">Case {c.n} <span aria-hidden>/</span> {c.category}</div>
+          <h3 id={`sheet-${c.id}`} className="mt-1 text-2xl font-semibold leading-tight text-ink">{c.name}</h3>
+          {c.visual && (
+            <button type="button" onClick={() => visualRef.current?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' })} className="mt-2 text-base font-semibold text-teal underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-teal">
+              Jump to {c.visual.label.toLowerCase()}
+            </button>
+          )}
+        </div>
+        <button ref={closeRef} type="button" onClick={onClose} aria-label="Close story" className="flex h-11 w-11 flex-none items-center justify-center rounded-full border-2 border-teal text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal">
+          <X size={20} aria-hidden />
+        </button>
+      </div>
+      <div className="flex-1 overflow-y-auto px-5 pb-10 pt-4">
+        <dl>
+          {c.rows.map(([label, text]) => (
+            <div key={label} className="border-t border-ink/15 py-4 first:border-t-0 first:pt-0">
+              <dt className="font-mono text-xs uppercase tracking-[0.12em] text-teal">{label}</dt>
+              <dd className="mt-1 text-[17px] leading-relaxed text-ink">{text}</dd>
+            </div>
+          ))}
+        </dl>
+        {c.note && <p className="mt-2 border-l-2 border-teal pl-3 text-[17px] leading-relaxed text-ink-soft">{c.note}</p>}
+        {c.visual && (
+          <section ref={visualRef} aria-label={c.visual.label} className="mt-8 scroll-mt-4 border-t border-ink/20 pt-6">
+            <h4 className="mb-4 text-xl font-semibold text-ink">{c.visual.label}</h4>
+            {c.visual.node}
+          </section>
+        )}
+      </div>
+    </motion.div>
   )
 }
