@@ -30,7 +30,7 @@ const summaries = [
     href: '#engine',
     headline: 'Offer take up 1.5% to 8%, A/B tested',
     built: 'A machine learning offer in the health insurance checkout.',
-    owned: 'Worked with data scientists.',
+    owned: 'Partnered on customer signals, evaluation and production guardrails.',
     changed: 'Revenue per customer up 10% vs the old rules.',
   },
 ]

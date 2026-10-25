@@ -12,7 +12,7 @@ const links = [
 ]
 
 const proof = [
-  { big: '3 hours to 20 min', label: 'to approve a complex health insurance application, with an AI assistant I led (Ria)', fine: '45% of health cases' },
+  { big: '3 hours to 20 min', label: 'to assess a complex health insurance application, with an AI assistant I led (Ria)', fine: '45% of health cases' },
   { big: 'US$12M to US$36M', label: 'in yearly insurance premiums from a travel product I owned, in 18 months', fine: 'Gross written premium, 10k policies a day' },
 ]
 
@@ -21,6 +21,8 @@ export default function HeroD() {
   const ref = useRef<HTMLElement>(null)
   const { x, y } = usePointerDepth(ref)
   const reduced = useMatchMedia('(prefers-reduced-motion: reduce)')
+  // Below lg the portrait sits under the text, so the marks gather around the portrait instead of behind the words.
+  const stacked = useMatchMedia('(max-width: 1023px)')
   const fx = useSpring(x, { stiffness: 90, damping: 20, mass: 0.9 })
   const fy = useSpring(y, { stiffness: 90, damping: 20, mass: 0.9 })
   const px = useTransform(fx, (v) => v * 10)
@@ -30,7 +32,7 @@ export default function HeroD() {
   return (
     <section id="top" ref={ref} className="relative flex flex-col px-6 pb-16 md:px-10 lg:min-h-screen lg:pb-14" style={{ overflowX: 'clip' }}>
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-        <ApertureField x={x} reduced={reduced} />
+        {!stacked && <ApertureField x={x} reduced={reduced} />}
         <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 70% at 50% 50%, transparent 40%, rgba(12,12,12,0.7) 100%)' }} />
         {/* Keeps the left column calm so the headline reads instantly. */}
         <div className="absolute inset-y-0 left-0 w-[46%]" style={{ background: 'linear-gradient(90deg, rgba(12,12,12,0.78) 0%, rgba(12,12,12,0.5) 45%, transparent 100%)' }} />
@@ -78,6 +80,11 @@ export default function HeroD() {
           transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
           style={{ perspective: 1100 }}
         >
+          {stacked && (
+            <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-6 bottom-0" style={{ WebkitMaskImage: 'radial-gradient(ellipse 72% 62% at 50% 52%, #000 35%, transparent 100%)', maskImage: 'radial-gradient(ellipse 72% 62% at 50% 52%, #000 35%, transparent 100%)' }}>
+              <ApertureField x={x} reduced={reduced} label={false} />
+            </div>
+          )}
           <div className="absolute inset-0 flex items-end justify-center">
             <motion.img
               src="/portrait-cutout.webp"
